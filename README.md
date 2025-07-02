@@ -1,6 +1,6 @@
 # **Botnet Source Code – Condi Rework (L4) aka Spoofed**
 
-## 🇷🇺 RU:
+## RU:
 
 Привет! Я выкладываю исходный код своего ботнета — это переработка Condi, работающая по L4 протоколу.
 
@@ -15,7 +15,7 @@
 
 ---
 
-## 🇺🇸 EN:
+## EN:
 
 Hello! I'm releasing the source code of my botnet — a rework of Condi that operates on the L4 protocol.
 

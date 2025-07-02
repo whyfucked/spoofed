@@ -1,25 +1,29 @@
-# Botnet Source Code - Condi Rework (L4) Aka Spoofed 
+# **Botnet Source Code – Condi Rework (L4) aka Spoofed**
 
-## **RU:**
+## 🇷🇺 RU:
 
-Привет! Я сливаю исходники своего бобнета (Condi рефорк). Для установки следуйте инструкциям в файле `install.txt`. Этот ботнет использует L4 протокол.  
+Привет! Я выкладываю исходный код своего ботнета — это переработка Condi, работающая по L4 протоколу.
 
-**Важно:**
-- В случае возникновения проблем, не пишите мне.
-- Приятного использования, но за репорты не отвечаю.
+📁 Для установки следуйте инструкциям в файле **`ru_install.txt`**.
 
-**Пожалуйста, используйте с осторожностью.**
-Никакой ответственности за последствия использования данного бобнета не несу.
+⚠️ **Важно:**
+
+* Если что-то сломается — **не пишите мне**.
+* Пользуйтесь на свой страх и риск — **за репорты и последствия не отвечаю**.
+
+💀 **Пожалуйста, используйте с осторожностью.**
 
 ---
 
-## **EN:**
+## 🇺🇸 EN:
 
-Hello! I’m releasing the source code of my botnet (Condi rework). To install, follow the instructions in the `install.txt` file. This botnet uses the L4 protocol.
+Hello! I'm releasing the source code of my botnet — a rework of Condi that operates on the L4 protocol.
 
-**Important:**
-- If anything goes wrong, do not contact me.
-- Enjoy using it, but I’m not responsible for reports.
+📁 To install, follow the steps in **`en_install.txt`**.
 
-**Please use it with caution.**
-I do not take any responsibility for the consequences of using this botnet.
+⚠️ **Important:**
+
+* If anything goes wrong — **do not contact me**.
+* Use at your own risk — **I am not responsible for reports or consequences**.
+
+💀 **Please use it responsibly.**

